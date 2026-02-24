@@ -73,8 +73,7 @@ function submitEmail() {
 
 
 const myName = "Adam";
-const myEmail = "@adam.com";
-alert(myName + ".com");
+alert(`${myName}.com`);
 
 const myEmail = myName + "@gmail.com";
 alert(myEmail);
