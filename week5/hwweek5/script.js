@@ -30,4 +30,10 @@ infoBtn.addEventListener("click", () => {
   if (email) parts.push(`Email: ${email}`);
 
   output.textContent = parts.join(" • ");
+
+  console.log("hello world"); 
+  
+
+
+
 });
