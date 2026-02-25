@@ -1,13 +1,15 @@
-// Log to confirm JS is connected
-console.log("JavaScript is connected!");
+function loginHandler() {
+  const name = document.getElementById("name-input").value;
+  const email = document.getElementById("email-input").value;
 
-// Variables
-let name = "Jon";
-
-// Functions
-function sayHello() {
-  console.log("Hello " + name);
+  alert("Welcome " + name + " (" + email + ")");
 }
 
-// Run function
-sayHello();
+function changeText() {
+  document.getElementById("change-text").textContent =
+    "The text has been changed!";
+}
+
+function changeColor() {
+  document.getElementById("change-text").style.color = "red";
+}
