@@ -21,4 +21,17 @@ h1 {
 /* Paragraphs */
 p {
   line-height: 1.5;
+
+  .li-item {
+  margin-bottom: 8px;
+}
+
+.li-item button {
+  margin-left: 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+}
 }
