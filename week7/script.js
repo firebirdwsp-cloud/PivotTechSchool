@@ -28,4 +28,26 @@ function login() {
     alert("Incorrect username or password.");
   }
 }
+const fruits = ["apple", "banana", "orange"];
 
+console.log("My fruits are:");
+console.log(fruits);
+
+function addFruit() {
+  const fruitInput = document.getElementById("fruit-input");
+  const fruitList = document.getElementById("fruit-list");
+
+  const fruitText = fruitInput.value.trim();
+
+  if (fruitText === "") {
+    alert("Please enter a fruit");
+    return;
+  }
+
+  const li = document.createElement("li");
+  li.textContent = fruitText;
+
+  fruitList.appendChild(li);
+
+  fruitInput.value = "";
+}
