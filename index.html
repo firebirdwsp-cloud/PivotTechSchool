@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Show</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="quiz-container">
+      <h1>Quiz Show</h1>
+      <p class="subtitle">Answer all 5 questions and click submit.</p>
+
+      <form id="quizForm">
+        <fieldset class="question-box">
+          <legend>1. What is the capital of France?</legend>
+
+          <label class="option">
+            <input type="radio" name="q1" value="Paris" />
+            <span>Paris</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q1" value="Rome" />
+            <span>Rome</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q1" value="Madrid" />
+            <span>Madrid</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="question-box">
+          <legend>2. What is 5 × 3?</legend>
+
+          <label class="option">
+            <input type="radio" name="q2" value="15" />
+            <span>15</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q2" value="10" />
+            <span>10</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q2" value="8" />
+            <span>8</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="question-box">
+          <legend>3. What does HTML stand for?</legend>
+
+          <label class="option">
+            <input type="radio" name="q3" value="HyperText Markup Language" />
+            <span>HyperText Markup Language</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q3" value="HighText Machine Language" />
+            <span>HighText Machine Language</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q3" value="Home Tool Markup Language" />
+            <span>Home Tool Markup Language</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="question-box">
+          <legend>4. What is CSS mainly used for?</legend>
+
+          <label class="option">
+            <input type="radio" name="q4" value="Styling a webpage" />
+            <span>Styling a webpage</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q4" value="Running a database" />
+            <span>Running a database</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q4" value="Sending emails" />
+            <span>Sending emails</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="question-box">
+          <legend>5. What is JavaScript mainly used for on a webpage?</legend>
+
+          <label class="option">
+            <input type="radio" name="q5" value="Adding interactivity" />
+            <span>Adding interactivity</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q5" value="Printing paper" />
+            <span>Printing paper</span>
+          </label>
+
+          <label class="option">
+            <input type="radio" name="q5" value="Creating folders" />
+            <span>Creating folders</span>
+          </label>
+        </fieldset>
+
+        <div class="button-row">
+          <button type="button" id="submitBtn">Submit Quiz</button>
+          <button type="reset" id="resetBtn">Reset</button>
+        </div>
+      </form>
+
+      <div id="result" class="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+
+  <!-- Result modal -->
+<div id="percent-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-card">
+    <h3 id="modal-title">Quiz Result</h3>
+    <p id="modal-text" class="modal-text">You scored 0%</p>
+    <div class="modal-actions">
+      <button id="modal-ok" class="btn">OK</button>
+    </div>
+  </div>
+</div>
+</html>
