@@ -11,6 +11,10 @@
       <h1>Quiz Show</h1>
       <p class="subtitle">Answer all 5 questions and click submit.</p>
 
+      <div id="scoreBox" class="score-box">
+        Right: 0 | Wrong: 0
+      </div>
+
       <form id="quizForm">
         <fieldset class="question-box">
           <legend>1. What is the capital of France?</legend>
@@ -112,21 +116,8 @@
           <button type="reset" id="resetBtn">Reset</button>
         </div>
       </form>
-
-      <div id="result" class="result"></div>
     </div>
 
     <script src="script.js"></script>
   </body>
-
-  <!-- Result modal -->
-<div id="percent-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-  <div class="modal-card">
-    <h3 id="modal-title">Quiz Result</h3>
-    <p id="modal-text" class="modal-text">You scored 0%</p>
-    <div class="modal-actions">
-      <button id="modal-ok" class="btn">OK</button>
-    </div>
-  </div>
-</div>
 </html>
