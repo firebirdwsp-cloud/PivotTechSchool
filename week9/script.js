@@ -15,4 +15,7 @@ function checkLogin() {
     message.textContent = "Incorrect email or password.";
     message.style.color = "red";
   }
-}
+}   
+
+//email is admin@email.com and pw is 1234
+
