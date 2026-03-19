@@ -1,42 +1,23 @@
 function checkLogin() {
-  console.log("Submit button clicked");
-
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value.trim();
   let message = document.getElementById("message");
 
-  let correctEmail = "admin@email.com";
-  let correctPassword = "1234";
-
-  if (email === correctEmail && password === correctPassword) {
-    message.textContent = "Login successful!";
-    message.style.color = "green";
-  } else {
-    message.textContent = "Incorrect email or password.";
-    message.style.color = "red";
-  }
-function checkLogin() {
-  console.log("Submit button clicked");
-
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
-  let message = document.getElementById("message");
-
-  let correctEmail = "admin@email.com";
-  let correctPassword = "1234";
-
-  if (email === correctEmail && password === correctPassword) {
+  if (
+    email.length >= 3 &&
+    email.length <= 20 &&
+    password.length >= 3 &&
+    password.length <= 20
+  ) {
     message.textContent = "Login successful!";
     message.style.color = "green";
 
-    window.location.href = "profile.html";
+    window.location.assign("./profile.html");
   } else {
-    message.textContent = "Incorrect email or password.";
+    message.textContent =
+      "Email and password must both be between 3 and 20 characters.";
     message.style.color = "red";
   }
 }
-
-}   
-
-//email is admin@email.com and pw is 1234
-
+// changed so any email can be used instead of a username, 
+// and added a message to show if the login was successful or not   
