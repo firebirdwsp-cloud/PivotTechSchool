@@ -56,4 +56,68 @@ function updateCompletedCount() {
   let completedTasks = document.querySelectorAll("#taskList li.completed").length;
   document.getElementById("taskHeading").textContent =
     "Tasks Completed: " + completedTasks;
+
+    const questions = [
+  { question: "What is 2 + 2?", answer: "4" },
+  { question: "What color is the sky?", answer: "blue" },
+  { question: "How many days are in a week?", answer: "7" },
+  { question: "What is 5 + 5?", answer: "10" }
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+let alreadyAnswered = false;
+
+function loadQuestion() {
+  document.getElementById("questionText").textContent =
+    questions[currentQuestionIndex].question;
+  document.getElementById("answerInput").value = "";
+  document.getElementById("feedback").textContent = "";
+  alreadyAnswered = false;
+}
+
+function submitAnswer() {
+  if (alreadyAnswered) {
+    document.getElementById("feedback").textContent =
+      "You already answered this question.";
+    return;
+  }
+
+  const userAnswer = document
+    .getElementById("answerInput")
+    .value
+    .trim()
+    .toLowerCase();
+
+  const correctAnswer = questions[currentQuestionIndex].answer.toLowerCase();
+
+  if (userAnswer === "") {
+    document.getElementById("feedback").textContent =
+      "Please enter an answer.";
+    return;
+  }
+
+  if (userAnswer === correctAnswer) {
+    document.getElementById("feedback").textContent = "Correct!";
+    score++;
+    document.getElementById("scoreText").textContent = "Score: " + score;
+  } else {
+    document.getElementById("feedback").textContent =
+      "Wrong! Correct answer: " + questions[currentQuestionIndex].answer;
+  }
+
+  alreadyAnswered = true;
+}
+
+function nextQuestion() {
+  currentQuestionIndex++;
+
+  if (currentQuestionIndex >= questions.length) {
+    currentQuestionIndex = 0;
+  }
+
+  loadQuestion();
+}
+
+loadQuestion();
 }
