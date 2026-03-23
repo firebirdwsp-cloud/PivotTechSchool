@@ -4,8 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css" />
   </head>
   <body>
-    <h1>Welcome to the Student Success Hub Dashboard</h1>
+    <div class="card">
+      <h1 id="welcomeText">Welcome</h1>
+      <p>You have successfully logged in to the Student Success Hub.</p>
+
+      <div class="task-section">
+        <h2 id="taskHeading">Tasks Completed: 0</h2>
+
+        <div class="task-form">
+          <input id="taskInput" type="text" placeholder="Add a task" />
+          <button onclick="addTask()">Add Task</button>
+        </div>
+
+        <ul id="taskList"></ul>
+      </div>
+    </div>
+    <hr />
+
+<div class="quiz-section">
+  <h2>Mini Quiz</h2>
+
+  <p id="questionText">What is 2 + 2?</p>
+
+  <input id="answerInput" type="text" placeholder="Enter your answer" />
+
+  <div class="quiz-buttons">
+    <button onclick="submitAnswer()">Submit Answer</button>
+    <button onclick="nextQuestion()">Next Question</button>
+  </div>
+
+  <p id="feedback"></p>
+  <h3 id="scoreText">Score: 0</h3>
+</div>
+
+    <script src="dashboard.js"></script>
   </body>
 </html>
