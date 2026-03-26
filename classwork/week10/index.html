@@ -3,13 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Storage</title>
-    <link rel="stylesheet" href="storage.css" />
+    <title>Storage Project</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Storage</h1>
-    <p>My basic boilerplate is working.</p>
+    <h1>Storage Project</h1>
 
+    <label for="nameInput">Name:</label>
+    <input type="text" id="nameInput" placeholder="Enter your name" />
+
+    <label for="passwordInput">Password:</label>
+    <input type="password" id="passwordInput" placeholder="Enter your password" />
+
+    <button onclick="saveUser()">Save User</button>
+
+    <script src="script.js"></script>
     <script src="storage.js"></script>
   </body>
 </html>
