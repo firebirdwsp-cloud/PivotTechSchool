@@ -9,6 +9,10 @@ function ProductCard({ product }) {
 
       <h2>{product.title}</h2>
 
+      <p className="price">
+        <strong>Price:</strong> ${product.price}
+      </p>
+
       <p>
         <strong>Brand:</strong> {product.brand}
       </p>
