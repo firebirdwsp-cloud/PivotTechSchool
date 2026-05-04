@@ -1,7 +1,11 @@
+import { Link } from "react-router";
+
 function ProductCard({ product }) {
   return (
     <div className="product-card">
-      <img src={product.thumbnail} alt={product.title} />
+      <Link to={`/details/${product.id}`}>
+        <img src={product.thumbnail} alt={product.title} />
+      </Link>
 
       <h2>{product.title}</h2>
 
