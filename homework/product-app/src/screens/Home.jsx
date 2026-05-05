@@ -1,66 +1,71 @@
-import { Routes, Route, Link } from "react-router";
+import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard.jsx";
 import SearchBar from "../components/SearchBar.jsx";
-import "../App.css";
-import { useEffect, useState } from "react";
 
+function Home({ addToCart, removeFromCart, cartItems }) {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  const handleSearch = async (searchText = "") => {
+    console.log("Searching for:", searchText);
 
-function Home() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+    setLoading(true);
+    setError(null);
 
-  const handleSearch = async (searchText = "") => {
-    console.log("Searching for:", searchText);
+    const url = searchText
+      ? `https://dummyjson.com/products/search?q=${encodeURIComponent(
+          searchText
+        )}`
+      : "https://dummyjson.com/products";
 
-    setLoading(true);
-    setError(null);
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
 
-    const url = searchText
-      ? `https://dummyjson.com/products/search?q=${encodeURIComponent(searchText)}`
-      : "https://dummyjson.com/products";
+      console.log(data.products);
+      setProducts(data.products);
+    } catch (error) {
+      console.log("Fetch error:", error);
+      setError("Something went wrong loading products.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
+  useEffect(() => {
+    handleSearch();
+  }, []);
 
-      console.log(data.products);
-      setProducts(data.products);
-    } catch (error) {
-      console.log("Fetch error:", error);
-      setError("Something went wrong loading products.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  return (
+    <div>
+      <h1>Product App</h1>
 
-  useEffect(() => {
-    handleSearch();
-  }, []);
+      <SearchBar onSearch={handleSearch} />
 
-  return (
-    <div className="app">
-      <h1>Product App</h1>
+      {loading && <h2 className="loading">Loading products...</h2>}
 
-      <SearchBar onSearch={handleSearch} />
+      {error && <h2 className="error">{error}</h2>}
 
-      {loading && <h2 className="loading">Loading products...</h2>}
+      {!loading && !error && products.length === 0 && (
+        <h2>No products found.</h2>
+      )}
 
-      {error && <h2 className="error">{error}</h2>}
-
-      {!loading && !error && (
-        <div className="product-grid">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      )}
-    </div>
-  );
+      {!loading && !error && products.length > 0 && (
+        <div className="product-grid">
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+              cartItems={cartItems}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
-
-
-
 
 export default Home;

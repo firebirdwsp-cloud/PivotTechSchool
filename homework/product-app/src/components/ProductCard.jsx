@@ -1,6 +1,8 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
-function ProductCard({ product }) {
+function ProductCard({ product, addToCart, removeFromCart, cartItems }) {
+  const isInCart = cartItems.some((item) => item.id === product.id);
+
   return (
     <div className="product-card">
       <Link to={`/details/${product.id}`}>
@@ -29,6 +31,23 @@ function ProductCard({ product }) {
         <strong>Stock:</strong>{" "}
         {product.stock === 0 ? "Sold Out" : product.stock}
       </p>
+
+      {isInCart ? (
+        <button
+          className="remove-btn"
+          onClick={() => removeFromCart(product.id)}
+        >
+          Remove from Cart
+        </button>
+      ) : (
+        <button
+          className="cart-btn"
+          onClick={() => addToCart(product)}
+          disabled={product.stock === 0}
+        >
+          {product.stock === 0 ? "Sold Out" : "Add to Cart"}
+        </button>
+      )}
     </div>
   );
 }
