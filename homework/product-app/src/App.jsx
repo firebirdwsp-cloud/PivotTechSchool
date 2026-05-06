@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Header from "./components/Header.jsx";
 import Home from "./screens/Home.jsx";
 import Details from "./screens/Details.jsx";
@@ -21,13 +24,22 @@ function App() {
             : item
         )
       );
+
+      toast.success(`${product.title} quantity updated!`);
     } else {
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      toast.success(`${product.title} added to cart!`);
     }
   }
 
   function removeFromCart(productId) {
+    const removedItem = cartItems.find((item) => item.id === productId);
+
     setCartItems(cartItems.filter((item) => item.id !== productId));
+
+    if (removedItem) {
+      toast.error(`${removedItem.title} removed from cart.`);
+    }
   }
 
   const cartCount = cartItems.reduce((total, item) => {
@@ -75,13 +87,12 @@ function App() {
         <Route
           path="/cart"
           element={
-            <Cart
-              cartItems={cartItems}
-              removeFromCart={removeFromCart}
-            />
+            <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
           }
         />
       </Routes>
+
+      <ToastContainer position="top-right" autoClose={2000} theme="dark" />
     </div>
   );
 }
