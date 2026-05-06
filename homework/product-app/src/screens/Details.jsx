@@ -75,6 +75,14 @@ function Details({ addToCart, removeFromCart, cartItems }) {
         <strong>Description:</strong> {product.description}
       </p>
 
+      <div className="tags">
+        {product.tags?.map((tag) => (
+          <span className="tag" key={tag}>
+            #{tag}
+          </span>
+        ))}
+      </div>
+
       {isInCart ? (
         <button
           className="remove-btn"

@@ -51,6 +51,7 @@ body {
   text-transform: uppercase;
   line-height: 1.1;
   background: linear-gradient(90deg, #ffdd57, #ff4ecd, #6c63ff, #00eaff);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 12px rgba(255, 78, 205, 0.45));
@@ -143,6 +144,7 @@ body {
   font-size: 52px;
   margin-bottom: 35px;
   background: linear-gradient(90deg, #ffdd57, #ff4ecd, #6c63ff, #00eaff);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
@@ -281,6 +283,25 @@ body {
   margin: 10px 0;
 }
 
+/* TAGS */
+.tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.tag {
+  font-size: 13px;
+  font-weight: bold;
+  color: #050014;
+  background: linear-gradient(135deg, #00eaff, #ffdd57);
+  padding: 6px 11px;
+  border-radius: 999px;
+  box-shadow: 0 0 12px rgba(0, 234, 255, 0.45);
+}
+
 /* ADD TO CART BUTTON */
 .cart-btn {
   margin-top: 15px;
@@ -303,6 +324,24 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+}
+
+/* REMOVE BUTTON */
+.remove-btn {
+  margin-top: 12px;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff4e4e, #ff4ecd);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.remove-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 18px rgba(255, 78, 78, 0.85);
 }
 
 /* DETAILS PAGE */
@@ -406,24 +445,6 @@ body {
   text-shadow: 0 0 14px rgba(0, 234, 255, 0.85);
 }
 
-/* REMOVE BUTTON */
-.remove-btn {
-  margin-top: 12px;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #ff4e4e, #ff4ecd);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.remove-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 18px rgba(255, 78, 78, 0.85);
-}
-
 /* LOADING + ERROR */
 .loading {
   font-size: 26px;
@@ -499,22 +520,4 @@ body {
     width: 160px;
     height: 160px;
   }
-
-  .tags {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 14px 0;
-}
-
-.tag {
-  font-size: 13px;
-  font-weight: bold;
-  color: #050014;
-  background: linear-gradient(135deg, #00eaff, #ffdd57);
-  padding: 6px 11px;
-  border-radius: 999px;
-  box-shadow: 0 0 12px rgba(0, 234, 255, 0.45);
-}
 }
