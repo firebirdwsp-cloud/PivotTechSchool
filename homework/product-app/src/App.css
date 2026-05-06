@@ -499,4 +499,22 @@ body {
     width: 160px;
     height: 160px;
   }
+
+  .tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.tag {
+  font-size: 13px;
+  font-weight: bold;
+  color: #050014;
+  background: linear-gradient(135deg, #00eaff, #ffdd57);
+  padding: 6px 11px;
+  border-radius: 999px;
+  box-shadow: 0 0 12px rgba(0, 234, 255, 0.45);
+}
 }

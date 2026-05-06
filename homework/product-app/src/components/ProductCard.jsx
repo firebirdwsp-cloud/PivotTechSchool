@@ -32,6 +32,14 @@ function ProductCard({ product, addToCart, removeFromCart, cartItems }) {
         {product.stock === 0 ? "Sold Out" : product.stock}
       </p>
 
+      <div className="tags">
+        {product.tags?.map((tag) => (
+          <span className="tag" key={tag}>
+            #{tag}
+          </span>
+        ))}
+      </div>
+
       {isInCart ? (
         <button
           className="remove-btn"
