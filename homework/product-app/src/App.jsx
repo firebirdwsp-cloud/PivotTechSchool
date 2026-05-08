@@ -8,12 +8,14 @@ import Home from "./screens/Home.jsx";
 import Details from "./screens/Details.jsx";
 import Category from "./screens/Category.jsx";
 import Cart from "./screens/Cart.jsx";
+import Checkout from "./screens/Checkout.jsx";
+import CheckoutComplete from "./screens/CheckoutComplete.jsx";
 import "./App.css";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
 
-  function addToCart(product) {
+  function addToCart(product, showToast = true) {
     const itemExists = cartItems.find((item) => item.id === product.id);
 
     if (itemExists) {
@@ -25,19 +27,50 @@ function App() {
         )
       );
 
-      toast.success(`${product.title} quantity updated!`);
+      if (showToast) {
+        toast.success(`${product.title} quantity updated!`);
+      }
     } else {
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
-      toast.success(`${product.title} added to cart!`);
+
+      if (showToast) {
+        toast.success(`${product.title} added to cart!`);
+      }
     }
   }
 
-  function removeFromCart(productId) {
+  function decreaseCartItem(productId, showToast = true) {
+    const itemExists = cartItems.find((item) => item.id === productId);
+
+    if (!itemExists) return;
+
+    if (itemExists.quantity === 1) {
+      setCartItems(cartItems.filter((item) => item.id !== productId));
+
+      if (showToast) {
+        toast.error(`${itemExists.title} removed from cart.`);
+      }
+    } else {
+      setCartItems(
+        cartItems.map((item) =>
+          item.id === productId
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+      );
+
+      if (showToast) {
+        toast.info(`${itemExists.title} quantity decreased.`);
+      }
+    }
+  }
+
+  function removeFromCart(productId, showToast = true) {
     const removedItem = cartItems.find((item) => item.id === productId);
 
     setCartItems(cartItems.filter((item) => item.id !== productId));
 
-    if (removedItem) {
+    if (removedItem && showToast) {
       toast.error(`${removedItem.title} removed from cart.`);
     }
   }
@@ -87,9 +120,26 @@ function App() {
         <Route
           path="/cart"
           element={
-            <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
+            <Cart
+              cartItems={cartItems}
+              addToCart={addToCart}
+              decreaseCartItem={decreaseCartItem}
+              removeFromCart={removeFromCart}
+            />
           }
         />
+
+        <Route
+          path="/checkout"
+          element={
+            <Checkout
+              cartItems={cartItems}
+              removeFromCart={removeFromCart}
+            />
+          }
+        />
+
+        <Route path="/checkout-complete" element={<CheckoutComplete />} />
       </Routes>
 
       <ToastContainer position="top-right" autoClose={2000} theme="dark" />
