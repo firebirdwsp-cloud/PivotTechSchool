@@ -23,6 +23,19 @@ export async function getPopularMovies(): Promise<Movie[]> {
   return data.results;
 }
 
+export async function getNowPlayingMovies(): Promise<Movie[]> {
+  const response = await fetch(
+    `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch now playing movies");
+  }
+
+  const data: MovieResponse = await response.json();
+  return data.results;
+}
+
 export async function searchMovies(query: string): Promise<Movie[]> {
   const response = await fetch(
     `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(

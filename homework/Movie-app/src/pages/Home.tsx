@@ -5,7 +5,12 @@ import MovieCard from "../components/MovieCard";
 import type { Movie } from "../types/Movie";
 import { getPopularMovies, searchMovies } from "../api/tmdb";
 
-function Home() {
+type HomeProps = {
+  favorites: Movie[];
+  onToggleFavorite: (movie: Movie) => void;
+};
+
+function Home({ favorites, onToggleFavorite }: HomeProps) {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -50,6 +55,10 @@ function Home() {
     }
   }
 
+  function isMovieFavorite(movieId: number) {
+    return favorites.some((favoriteMovie) => favoriteMovie.id === movieId);
+  }
+
   return (
     <>
       <Header
@@ -69,7 +78,12 @@ function Home() {
       {!loading && !error && movies.length > 0 && (
         <main className="movie-grid">
           {movies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              isFavorite={isMovieFavorite(movie.id)}
+              onToggleFavorite={onToggleFavorite}
+            />
           ))}
         </main>
       )}

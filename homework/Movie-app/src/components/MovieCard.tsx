@@ -4,10 +4,14 @@ import { genreMap } from "../data/genres";
 
 type MovieCardProps = {
   movie: Movie;
+  isFavorite: boolean;
+  onToggleFavorite: (movie: Movie) => void;
 };
 
-function MovieCard({ movie }: MovieCardProps) {
-  const imageBaseUrl = import.meta.env.VITE_TMDB_IMAGE_BASE_URL;
+function MovieCard({ movie, isFavorite, onToggleFavorite }: MovieCardProps) {
+  const imageBaseUrl =
+    import.meta.env.VITE_TMDB_IMAGE_BASE_URL ||
+    "https://image.tmdb.org/t/p/w500";
 
   const posterUrl = movie.poster_path
     ? `${imageBaseUrl}${movie.poster_path}`
@@ -21,8 +25,19 @@ function MovieCard({ movie }: MovieCardProps) {
     : "No genre listed";
 
   return (
-    <Link to={`/movie/${movie.id}`} className="movie-card-link">
-      <article className="movie-card">
+    <article className="movie-card">
+      <button
+        className={`favorite-button ${
+          isFavorite ? "favorite-button-active" : ""
+        }`}
+        type="button"
+        onClick={() => onToggleFavorite(movie)}
+        aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+      >
+        {isFavorite ? "♥" : "♡"}
+      </button>
+
+      <Link to={`/movie/${movie.id}`} className="movie-card-content">
         <img className="movie-poster" src={posterUrl} alt={movie.title} />
 
         <div className="movie-info">
@@ -38,8 +53,8 @@ function MovieCard({ movie }: MovieCardProps) {
 
           <p className="movie-overview">{movie.overview}</p>
         </div>
-      </article>
-    </Link>
+      </Link>
+    </article>
   );
 }
 

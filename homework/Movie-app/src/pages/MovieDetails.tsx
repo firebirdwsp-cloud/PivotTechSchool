@@ -3,7 +3,12 @@ import { Link, useParams } from "react-router";
 import type { Movie } from "../types/Movie";
 import { getMovieDetails } from "../api/tmdb";
 
-function MovieDetails() {
+type MovieDetailsProps = {
+  favorites: Movie[];
+  onToggleFavorite: (movie: Movie) => void;
+};
+
+function MovieDetails({ favorites, onToggleFavorite }: MovieDetailsProps) {
   const { movieId } = useParams<{ movieId: string }>();
 
   const [movie, setMovie] = useState<Movie | null>(null);
@@ -45,13 +50,19 @@ function MovieDetails() {
     return <p className="status-message">No movie selected.</p>;
   }
 
-  const imageBaseUrl = import.meta.env.VITE_TMDB_IMAGE_BASE_URL;
+  const imageBaseUrl =
+    import.meta.env.VITE_TMDB_IMAGE_BASE_URL ||
+    "https://image.tmdb.org/t/p/w500";
 
   const posterUrl = movie.poster_path
     ? `${imageBaseUrl}${movie.poster_path}`
     : "https://placehold.co/300x450?text=No+Poster";
 
   const genres = movie.genres?.map((genre) => genre.name).join(", ");
+
+  const isFavorite = favorites.some(
+    (favoriteMovie) => favoriteMovie.id === movie.id
+  );
 
   return (
     <section className="details-page">
@@ -64,6 +75,16 @@ function MovieDetails() {
 
         <div className="details-info">
           <h1 className="details-title">{movie.title}</h1>
+
+          <button
+            className={`details-favorite-button ${
+              isFavorite ? "details-favorite-button-active" : ""
+            }`}
+            type="button"
+            onClick={() => onToggleFavorite(movie)}
+          >
+            {isFavorite ? "♥ Remove from Favorites" : "♡ Add to Favorites"}
+          </button>
 
           {movie.tagline && <p className="details-tagline">{movie.tagline}</p>}
 
