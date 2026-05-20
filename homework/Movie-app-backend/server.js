@@ -1,17 +1,30 @@
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 const PORT = 3000;
 
-// Allows Express to read JSON data from POST requests
+// Allows Express to read JSON from POST requests
 app.use(express.json());
 
-// Fake storage for practice
-let users = [];
+// Path to users.json file
+const usersFilePath = path.join(__dirname, "users.json");
+
+// Read users from users.json
+function readUsers() {
+  const data = fs.readFileSync(usersFilePath, "utf-8");
+  return JSON.parse(data);
+}
+
+// Save users to users.json
+function saveUsers(users) {
+  fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
+}
 
 // Home route
 app.get("/", (req, res) => {
-  res.send("Backend server is running!");
+  res.status(200).send("Backend server is running!");
 });
 
 // Movies route
@@ -35,20 +48,14 @@ app.get("/api/movies", (req, res) => {
   ]);
 });
 
-// Users route
+// Users route - gets all saved users from users.json
 app.get("/api/users", (req, res) => {
+  const users = readUsers();
+
   res.status(200).json(users);
 });
 
-// About route
-app.get("/api/about", (req, res) => {
-  res.status(200).json({
-    appName: "Movie App Backend",
-    message: "This is a simple Express backend API.",
-  });
-});
-
-// Login POST route
+// Login POST route - saves username and password to users.json
 app.post("/api/login", (req, res) => {
   const { username, password } = req.body;
 
@@ -58,6 +65,8 @@ app.post("/api/login", (req, res) => {
     });
   }
 
+  const users = readUsers();
+
   const newUser = {
     id: users.length + 1,
     username: username,
@@ -66,9 +75,19 @@ app.post("/api/login", (req, res) => {
 
   users.push(newUser);
 
+  saveUsers(users);
+
   res.status(201).json({
-    message: "User login info saved",
+    message: "User saved to users.json",
     user: newUser,
+  });
+});
+
+// About route
+app.get("/api/about", (req, res) => {
+  res.status(200).json({
+    appName: "Movie App Backend",
+    message: "This is a simple Express backend API.",
   });
 });
 
