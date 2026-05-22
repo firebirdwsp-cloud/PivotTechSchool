@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router";
 import "./App.css";
+
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import About from "./pages/About";
 import MovieDetails from "./pages/MovieDetails";
 import NowPlaying from "./pages/NowPlaying";
+import Login from "./pages/Login";
+
 import type { Movie } from "./types/Movie";
 
 function App() {
@@ -85,6 +88,8 @@ function App() {
         />
 
         <Route path="/about" element={<About />} />
+
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );

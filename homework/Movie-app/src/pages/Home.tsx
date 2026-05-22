@@ -23,9 +23,11 @@ function Home({ favorites, onToggleFavorite }: HomeProps) {
         setError("");
 
         const popularMovies = await getPopularMovies();
+
         setMovies(popularMovies);
-      } catch {
-        setError("Failed to load movies.");
+      } catch (error) {
+        console.error("Failed to load movies:", error);
+        setError("Failed to load movies from the backend.");
       } finally {
         setLoading(false);
       }
@@ -48,8 +50,9 @@ function Home({ favorites, onToggleFavorite }: HomeProps) {
         const searchedMovies = await searchMovies(searchTerm);
         setMovies(searchedMovies);
       }
-    } catch {
-      setError("Failed to search movies.");
+    } catch (error) {
+      console.error("Failed to search movies:", error);
+      setError("Failed to search movies from the backend.");
     } finally {
       setLoading(false);
     }
