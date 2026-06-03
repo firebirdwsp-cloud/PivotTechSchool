@@ -12,6 +12,11 @@ type AboutPhoto = {
   alt: string;
 };
 
+type SocialLink = {
+  name: string;
+  url: string;
+};
+
 const aboutItems: AboutItem[] = [
   {
     title: "Skills",
@@ -24,8 +29,9 @@ const aboutItems: AboutItem[] = [
       "Grow Light in Progress Studios, keep improving as a developer, and build meaningful creative projects.",
   },
   {
-    title: "Social Links",
-    description: "Instagram | Facebook | GitHub | Portfolio",
+    title: "Interests",
+    description:
+      "Art, coding, Nashville, personal growth, music, sports, and building a creative life.",
   },
 ];
 
@@ -41,6 +47,21 @@ const aboutPhotos: AboutPhoto[] = [
   {
     src: aboutPhoto3,
     alt: "Colorful artwork from Light in Progress Studios",
+  },
+];
+
+const socialLinks: SocialLink[] = [
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/lipstudioart/",
+  },
+  {
+    name: "Facebook",
+    url: "https://www.facebook.com/lipstudio",
+  },
+  {
+    name: "Portfolio",
+    url: "https://www.lightinprogress.com/",
   },
 ];
 
@@ -93,6 +114,29 @@ function About() {
           </div>
         ))}
       </div>
+
+      <section className="social-section">
+        <h2>Connect With Me</h2>
+
+        <p>
+          Follow my work, check out my projects, or connect with Light in
+          Progress Studios online.
+        </p>
+
+        <div className="social-links">
+          {socialLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.url}
+              target="_blank"
+              rel="noreferrer"
+              className="social-link"
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+      </section>
     </section>
   );
 }
